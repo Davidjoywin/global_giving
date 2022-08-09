@@ -1,0 +1,56 @@
+{% extends 'geeve/base.html' %} 
+{% load util %}
+
+{% block header %} 
+Welcome to geeve {% if request.user.is_authenticated %} {{ request.user }} {% else %} login or signup {% endif %} . It's a good thing to give! 
+{% endblock %} 
+
+{% comment %}
+{% block main %}
+{% if projects %} 
+  {% for project in projects %}
+    <p>{{ project.active }}</p>
+    <p>{{ project.title }}</p>
+    <p>{{ project.summary }}</p>
+    <p>{{ project.contactName }}</p>
+    <p>{{ project.contactTitle }}</p>
+    <p>{{ project.contactAddress }}</p>
+    <p>{{ project.contactAddress2 }}</p>
+    <p>{{ project.contactCity }}</p>
+    <p>{{ project.contactState }}</p>
+    <p>{{ project.contactPostal }}</p>
+    <p>{{ project.contactCountry }}</p>
+    <a href="{{ project.contactUrl }}">contact</a>
+    <a href="{{ project.projectLink }}">Project</a>
+    <a href="{{ project.projectReportLink }}">Project Report</a>
+    <p>{{ project.themeName }}</p>
+    <p>{{ project.country }}</p>
+    <p>{{ project.iso3166CountryCode }}</p>
+    <p>{{ project.region }}</p>
+    <p>{{ project.goal }}</p>
+    <p>{{ project.funding }}</p>
+    <p>{{ project.remaining }}</p>
+    <p>{{ project.numberOfDonations }}</p>
+    <p>{{ project.status }}</p>
+    <p>{{ project.need }}</p>
+    <p>{{ project.activities }}</p>
+    <a href="{{ project.additionalDocumentation }}">Additional documentation</a>
+    <img src="{{ project.imageLink }}" alt="image link">
+    <p>{{ project.approvedDate }}</p>
+    <p>{{ project.dateOfMostRecentReport }}</p>
+    <p>{{ project.type }}</p>
+
+  {% endfor %} 
+{% endif %}
+
+{% endblock %} 
+{% endcomment %}
+
+{% block main %}
+{% for project in projects %} 
+<p>{{ project }}</p><br>
+{% endfor %} 
+
+<a href="{% url 'geeve:projects' next_project_id %}">More</a>
+
+{% endblock %} 

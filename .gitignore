@@ -286,3 +286,4 @@ cython_debug/
 
 .testing.py
 .geeve_db
+.global_style

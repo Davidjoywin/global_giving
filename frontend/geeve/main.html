@@ -1,0 +1,142 @@
+{% extends 'geeve/base.html' %} 
+
+{% block content %} 
+{% include 'geeve/navbar.html' %} 
+
+<main class="layout layout--3">
+    <div class="container">
+      <!-- Themes Start -->
+      <div class="topics">
+        <div class="topics__header">
+          <h2>Browse Topics</h2>
+        </div>
+        <ul class="topics__list">
+          <li>
+            <a href="{% url 'geeve:home' %}" class="active">All<span>553</span></a>
+          </li>
+          {% for theme in themes.themes.theme %}
+          <li>
+            <a href="{% url 'geeve:theme_project' theme.id %}" class="active">{{ theme.name }}<span>553</span></a>
+          </li>
+          {% endfor %} 
+        </ul>
+      </div>
+      <!-- Themes End -->
+
+      <!-- Organizations List Start -->
+      <div class="roomList">
+        <div class="mobile-menu">
+          <form class="header__search">
+            <label>
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                <title>search</title>
+                <path
+                  d="M32 30.586l-10.845-10.845c1.771-2.092 2.845-4.791 2.845-7.741 0-6.617-5.383-12-12-12s-12 5.383-12 12c0 6.617 5.383 12 12 12 2.949 0 5.649-1.074 7.741-2.845l10.845 10.845 1.414-1.414zM12 22c-5.514 0-10-4.486-10-10s4.486-10 10-10c5.514 0 10 4.486 10 10s-4.486 10-10 10z"
+                ></path>
+              </svg>
+              <input placeholder="Search for posts" />
+            </label>
+          </form>
+          <div class="mobile-menuItems">
+            <a class="btn btn--main btn--pill" href="#">Browse Topics</a>
+            <a class="btn btn--main btn--pill" href="#">Recent Activities</a>
+          </div>
+        </div>
+        <div class="roomList__header">
+          <div>
+            <h2>Geeve Organizations</h2>
+            <p>{{ projects.projects.numberFound }} projects available</p>
+          </div>
+
+          {% comment %} 
+          <a class="btn btn--main" href="create-room.html">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+              <title>add</title>
+              <path
+                d="M16.943 0.943h-1.885v14.115h-14.115v1.885h14.115v14.115h1.885v-14.115h14.115v-1.885h-14.115v-14.115z"
+              ></path>
+            </svg>
+            Create Room
+          </a>
+          {% endcomment %} 
+        </div>
+        
+        {% for organization in organizations.organizations.organization %} 
+        <div class="roomListRoom">
+          <div class="roomListRoom__header">
+            <a href="" class="roomListRoom__author">
+              <div class="avatar avatar--small active">
+                <img src="{{ organization.logoUrl }}" />
+              </div>
+              <span>{{ Organization.name }}</span>
+            </a>
+          
+          </div>
+          <div class="roomListRoom__content">
+            <a href="{% url 'geeve:organization_details' organization.id %}">{{ organization.title }}</a>
+            <p>
+                Mission - {{ organization.mission }}
+            </p>
+            
+          </div>
+          <a href="{% url 'geeve:submit_donation' organization.id %}">
+            {% include 'geeve/donation_button.html' %} 
+          </a>
+        </div>
+        {% endfor %} 
+        <a href="">
+          {% include 'geeve/next_button.html' %} 
+        </a>
+      </div>
+      <!-- Organizations List End -->
+
+      <!-- Activities Start -->
+      <div class="activities">
+        <div class="activities__header">
+          <h2>Featured Project</h2>
+        </div>
+        {% for project in featured_proejects.projects %} 
+        <div class="activities__box">
+          <div class="activities__boxHeader roomListRoom__header">
+            <a href="#" class="roomListRoom__author">
+              <div class="avatar avatar--small">
+              {% for image in project.image %}
+                {% if image.imageLink.size == "small" %}
+                <img src={{ image.imageLink.url }} />
+                {% endif %} 
+              {% endfor %} 
+              </div>
+              <p>
+                {{ project.title }}
+                <span> {{ project.approvedDate }}</span>
+              </p>
+            </a>
+            <div class="roomListRoom__actions">
+              <a href="#">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                  <title>remove</title>
+                  <path
+                    d="M27.314 6.019l-1.333-1.333-9.98 9.981-9.981-9.981-1.333 1.333 9.981 9.981-9.981 9.98 1.333 1.333 9.981-9.98 9.98 9.98 1.333-1.333-9.98-9.98 9.98-9.981z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="activities__boxContent">
+            <p>{{ project.activities }}</p>
+            <div class="activities__boxRoomContent">
+              Funding - {{ project.funding }} | Goal - {{ project.goal }}
+            </div>
+          </div>
+          <a href="#">
+            {% include 'geeve/donation_button.html' %} 
+          </a>
+        </div>
+        {% endfor %} 
+
+      </div>
+      <!-- Activities End -->
+    </div>
+  </main>
+</body>
+{% endblock %} 

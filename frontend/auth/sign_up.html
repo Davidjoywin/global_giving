@@ -16,7 +16,7 @@
         <div class="layout__body">
           <h2 class="auth__tagline">Find charity organizations/projects to give to today!</h2>
 
-          <form class="form" action="{% url 'auth:signup' %}">
+          <form class="form" action="{% url 'auth:signup' %}" method="post">
             {% for user_form in new_user_form %}
             <div class="form__group form__group">
               <label for="room_name">{{ user_form.label }}</label>

@@ -15,7 +15,7 @@ def register_user(request):
             login(request, user)
             return redirect("geeve:home")
         
-        messages.error(request, "Used Username or invalid Password!")
+        messages.error(request, "Invalid Username OR Password!")
         return redirect("auth:signup")
 
     context = {
@@ -30,11 +30,13 @@ def login_user(request):
     if request.method == 'POST':
         username=request.POST.get("username")
         password=request.POST.get("password")
+        try:
+            user=authenticate(request, username=username, password=password)
+            login(request, user)
+            return redirect("geeve:home")
 
-        user=authenticate(request, username=username, password=password)
-        login(request, user)
-
-        return redirect("geeve:home")
+        except Exception as err:
+            return redirect("auth:login")
 
     if request.user.is_authenticated:
         return redirect("geeve:home")

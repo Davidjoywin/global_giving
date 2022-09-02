@@ -4,6 +4,7 @@
 <main class="delete-item layout">
   <div class="container">
       <div class="layout__box">
+          {% comment %} 
           <div class="layout__boxHeader">
               <div class="layout__boxTitle">
                   <a href="#">
@@ -18,10 +19,11 @@
                   <h3>Back</h3>
               </div>
           </div>
+          {% endcomment %} 
           <div class="layout__body">
-              <form class="form" action="#">
+              <form class="form" action="{% url 'geeve:home' %}">
                   <div class="form__group">
-                      <p>No data found. Or network issues!</p>
+                      <h2>No data found. Or network issues!</h2>
                   </div>
 
                   <div class="for__group">

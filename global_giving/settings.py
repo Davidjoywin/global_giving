@@ -19,7 +19,7 @@ SECRET_KEY = 'django-insecure-@4a7#nbb9%q5&9(6q@u=*35-vu$1#ic)o(@m_xp(a-2wda&!w6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["theglobalgiving.herokuapp.com"]
+ALLOWED_HOSTS = ["theglobalgiving.herokuapp.com", "127.0.0.1"]
 
 
 # Application definition
@@ -85,12 +85,12 @@ WSGI_APPLICATION = 'global_giving.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': config.DB_NAME,
-        'USER': config.DB_USER,
-        'PASSWORD': config.DB_PASSWORD,
-        'HOST': "localhost",
-        'PORT': '5432'       
+        # 'USER': config.DB_USER,
+        # 'PASSWORD': config.DB_PASSWORD,
+        # 'HOST': "localhost",
+        # 'PORT': ''
     }
 }
 

@@ -38,12 +38,6 @@ INSTALLED_APPS = [
     'geeve_style',
 ]
 
-TAILWIND_APP_NAME = 'geeve_style'
-
-INTERNAL_IPS = [
-    "127.0.0.1",
-    ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

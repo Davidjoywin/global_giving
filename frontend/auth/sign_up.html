@@ -17,6 +17,7 @@
           <h2 class="auth__tagline">Find charity organizations/projects to give to today!</h2>
 
           <form class="form" action="{% url 'auth:signup' %}" method="post">
+            {% csrf_token %} 
             {% for user_form in new_user_form %}
             <div class="form__group form__group">
               <label for="room_name">{{ user_form.label }}</label>

@@ -34,8 +34,6 @@ INSTALLED_APPS = [
     'django_browser_reload',
     'geeve',
     'geeve_auth',
-    'tailwind',
-    'geeve_style',
 ]
 
 MIDDLEWARE = [

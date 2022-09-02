@@ -1,1 +1,1 @@
-web gunicorn gobal_giving.wsgi:application --log-file -
+web: gunicorn gobal_giving.wsgi:application --log-file -

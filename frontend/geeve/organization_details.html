@@ -1,25 +1,48 @@
+{% extends 'geeve/base.html' %} 
+
+{% block web_title %} 
+Organization details
+{% endblock %} 
+
+{% block content %} 
+
 <div class="roomList">
   <div class="profile">
     <div class="profile__avatar">
       <div class="avatar avatar--large active">
-        <img src="https://randomuser.me/api/portraits/men/11.jpg" />
+        <img src="{{ organization.organization.logoUrl }}" />
       </div>
     </div>
     <div class="profile__info">
-      <h3>Dennis Kardasian Ivy</h3>
-      <p>@dennis_ivy</p>
-      <a href="edit-user.html" class="btn btn--main btn--pill">Edit Profile</a>
+      <h3>{{ organization.organization.name }}</h3>
+      <a href="{{ organization.organization.url }}" class="btn btn--main btn--pill">More on organization</a>
+      <p></p><a href="{% url 'geeve:organization_projects' organization.organization.id %}">Total projects found is - {{ organization.organization.totalProjects }}</a></p>
     </div>
     <div class="profile__about">
-      <h3>About</h3>
+      <h3>Mission</h3>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur illo tenetur
-        facilis sunt nemo debitis quisquam hic atque aut? Ducimus alias placeat optio
-        accusamus repudiandae quis ab ex exercitationem rem?
+        {{ organization.organization.mission }}
       </p>
+
+      <h3>Themes</h3>
+      {% for theme in organization.organization.themes.theme %} 
+      <a>- {{ theme.name }} </a>
+      {% endfor %}
+
+      <h3>Countries</h3>
+      {% for country in organization.organization.countries.country %} 
+      <p>- {{ country.name }}</p>
+      {% endfor %} 
     </div>
   </div>
+  {% comment %}
+  <a href="{% url 'geeve:submit_donation' organization.id %}">
+    {% include 'geeve/donation_button.html' %} 
+  </a>
+  {% endcomment %} 
 
+  {% comment %}
+  {% for theme in organization.organization.themes %} 
   <div class="roomList__header">
     <div>
       <h2>Study Rooms Hosted by dennis_ivy</a>
@@ -68,6 +91,11 @@
       <p class="roomListRoom__topic">Python</p>
     </div>
   </div>
+  {% endfor %}
+  {% endcomment %}
+
+
+  {% comment %} 
   <div class="roomListRoom">
     <div class="roomListRoom__header">
       <a href="profile.html" class="roomListRoom__author">
@@ -110,4 +138,6 @@
       <p class="roomListRoom__topic">Python</p>
     </div>
   </div>
+  {% endcomment %} 
 </div>
+{% endblock %} 

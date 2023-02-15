@@ -85,6 +85,25 @@ def get_all_projects(next_project_id=None, summary=False):
         logging.warning(err)
         # get_all_projects(next_project_id, summary)
 
+# create a decarator recursively request paginated api method
+
+def request_more(api_method):
+    def wrapper(project_id):
+        has_next = True
+        available_response = api_method(project_id)
+        next_project_id = available_response["projects"]["nextProjectId"]
+
+        while (has_next):        
+            available_response = api_method(next_project_id)
+            next_project_id = available_response["projects"]["project"]
+            available_list = available_response["projects"]["project"]
+            number_found = available_response["projects"]["numberFound"]
+            try:
+                has_next = available_response["projects"]["hasNext"]
+            except Exception:
+                has_next = False
+    
+       
 def get_featured_projects(summary=False):
     path = "/api/public/projectservice/featured/projects"
 
@@ -343,7 +362,7 @@ def get_data_from_api(api_method):
 #     # response = search_for_projects("flood", country="IN", theme="edu")
 #     # print(response)
 
-#     from config import EMAIL, PASSWORD, API_KEY, URL
+    # from config import EMAIL, PASSWORD, API_KEY, URL
 
-#     response = get_access_token()
-#     print(response) 
+    # response = get_all_projects()
+    # print(response) 

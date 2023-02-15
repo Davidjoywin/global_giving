@@ -1,1 +1,0 @@
-web: gunicorn global_giving.wsgi:application --log-file -

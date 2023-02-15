@@ -47,3 +47,11 @@ def get_isocountrycode():
     }
 
     return isocountrycode
+
+def get_theme_name_with_theme_id(theme_id, themes):
+    theme_name = None
+ 
+    for theme in themes:
+        if theme['id'] == theme_id:
+            theme_name = theme['name']
+    return theme_name
